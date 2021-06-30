@@ -11,6 +11,7 @@ const connect = function () {
   conn.on('data', (data) => {
     console.log('Message from client: ', data)
   });
+  
 
   conn.on('connect', () => {
     console.log('Successfully connected to game server')
@@ -18,6 +19,10 @@ const connect = function () {
 
   stdin.on('data', function (message){
     conn.write(`Name: ${message}`)
+  })
+
+  stdin.on('data', (message) => {
+    setTimeout(() => {conn.write(`Move: ${message}`)}, 500)
   })
 
   // interpret incoming data as text
