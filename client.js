@@ -22,7 +22,7 @@ const connect = function () {
   })
 
   stdin.on('data', (message) => {
-    setTimeout(() => {conn.write(`Move: ${message}`)}, 500)
+    setInterval(() => {conn.write(`Move: ${message}`)}, 500)
   })
 
   // interpret incoming data as text
