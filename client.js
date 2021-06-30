@@ -1,5 +1,5 @@
 const net = require("net");
-const stdin = process.stdin
+// const stdin = process.stdin
 
 // establishes a connection with the game server
 const connect = function () {
@@ -11,19 +11,12 @@ const connect = function () {
   conn.on('data', (data) => {
     console.log('Message from client: ', data)
   });
-  
 
   conn.on('connect', () => {
     console.log('Successfully connected to game server')
+    conn.write(`Name: ytl`)
   });
 
-  stdin.on('data', function (message){
-    conn.write(`Name: ${message}`)
-  })
-
-  stdin.on('data', (message) => {
-    setInterval(() => {conn.write(`Move: ${message}`)}, 500)
-  })
 
   // interpret incoming data as text
   conn.setEncoding("utf8");
@@ -32,4 +25,11 @@ const connect = function () {
 };
 
 
-module.exports = connect
+module.exports = {
+  connect
+}
+
+
+// stdin.on('data', (message) => {
+//   setInterval(() => {conn.write(`Move: ${message}`)}, 500)
+// })
